@@ -35,3 +35,52 @@ b) Podem existir dias sem faturamento, como nos finais de semana e feriados. Est
 c) Utilize o algoritmo mais veloz que puder definir.
 
 ### RESOLUÇÃO NO DOCUMENTO calculates-billing-service.rb, fiz em ruby ####
+
+
+4) 
+CREATE TABLE states (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL
+);
+
+CREATE TABLE customers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  legal_name TEXT NOT NULL,
+  code TEXT NOT NULL,
+  id_state INTEGER,
+  FOREIGN KEY (id_state) REFERENCES states(id)
+);
+
+CREATE TABLE phone_types (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  kind TEXT NOT NULL
+);
+
+CREATE TABLE phones (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  number TEXT NOT NULL,
+  id_customer INTEGER,
+  id_phone_type INTEGER,
+  FOREIGN KEY (id_customer) REFERENCES customers(id),
+  FOREIGN KEY (id_phone_type) REFERENCES phone_types(id)
+);
+
+SELECT c.code, c.legal_name, p.number FROM customer AS c
+INNER JOIN 
+
+
+SELECT 
+    c.code,
+    c.legal_name,
+    p.number AS phone_number
+FROM 
+    customers c
+JOIN 
+    states s ON c.id_state = s.id
+LEFT JOIN 
+    phones p ON c.id = p.id_customer
+WHERE 
+    s.name = 'São Paulo';
+
+### DIAGRAMA NO DOCUMENTO diagrama.jpg ###
+
